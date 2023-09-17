@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Finds words in the built-in Unix/Linux dictionary when a regex is passed in as an argument.
+
+DICT_PATH=/usr/share/dict/words
+
+grep -i "$1" "$DICT_PATH"
