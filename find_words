@@ -4,4 +4,4 @@
 
 DICT_PATH=/usr/share/dict/words
 
-echo "$DICT_PATH"
+grep -i "$1" "$DICT_PATH"
