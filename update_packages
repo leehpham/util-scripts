@@ -9,9 +9,9 @@ function pull_z {
 	if [[ -d "$Z_PATH" ]]; then
 		echo "Updating z ..."
 		git -C "$Z_PATH" pull
-		echo "Finished updating z."
+		printf "Finished updating z.\n\n"
 	else
-		echo "$Z_PATH does not exists."
+		echo "$Z_PATH does not exist."
 	fi
 }
 
@@ -29,7 +29,7 @@ function update_homebrew_packages {
 		brew update
 		brew outdated
 		brew upgrade
-		echo "Finished updating Homebrew's packages."
+		printf "Finished updating Homebrew's packages.\n\n"
 	else
 		echo "Homebrew is not installed or not executable."
 	fi
@@ -43,11 +43,43 @@ function update_omz {
 	if [[ -f "$ZSH/$OMZ_BASH_FILE" ]]; then
 		echo "Updating OMZ ..."
 		"$ZSH/tools/upgrade.sh"
+		printf "Finished updating OMZ.\n\n"
 	else
 		echo "OMZ is not installed."
 	fi
 }
 
+function pull_powerlevel10k {
+	local POWERLEVEL10K_PATH="$ZSH/custom/themes/powerlevel10k"
+
+	if [[ -d "$POWERLEVEL10K_PATH" ]]; then
+		echo "Updating powerlevel10k ..."
+		git -C "$POWERLEVEL10K_PATH" pull
+		printf "Finished updating powerlevel10k.\n\n"
+	else
+		echo "$POWERLEVEL10K_PATH does not exist."
+	fi
+}
+
+function pull_zsh_plugin {
+	local PLUGIN_PATH="$ZSH/custom/plugins/$1"
+
+	if [[ -d "$PLUGIN_PATH" ]]; then
+		echo "Updating $1 ..."
+		git -C "$PLUGIN_PATH" pull
+		printf "Finished updating %s.\n\n" "$1"
+	else
+		echo "$PLUGIN_PATH does not exist."
+	fi
+}
+
+function update_omz_packages {
+	pull_powerlevel10k
+	pull_zsh_plugin "zsh-autosuggestions"
+	pull_zsh_plugin "zsh-syntax-highlighting"
+}
+
 update_essential_scripts
 update_homebrew_packages
 update_omz
+update_omz_packages
