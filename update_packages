@@ -35,5 +35,19 @@ function update_homebrew_packages {
 	fi
 }
 
+function update_omz {
+	local OMZ_BASH_FILE="oh-my-zsh.sh"
+
+	# $ZSH points to where OMZ is installed.
+
+	if [[ -f "$ZSH/$OMZ_BASH_FILE" ]]; then
+		echo "Updating OMZ ..."
+		"$ZSH/tools/upgrade.sh"
+	else
+		echo "OMZ is not installed."
+	fi
+}
+
 update_essential_scripts
 update_homebrew_packages
+update_omz
