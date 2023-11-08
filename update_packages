@@ -1,0 +1,28 @@
+#!/bin/bash
+
+ESSENTIAL_SCRIPTS_PATH="$HOME/essential-scripts"
+
+function pull_z {
+	local Z_DIR="z"
+	local Z_PATH="$ESSENTIAL_SCRIPTS_PATH/$Z_DIR"
+
+	if [[ -d "$Z_PATH" ]]; then
+		echo "Updating z ..."
+		git -C "$Z_PATH" pull
+		echo "Finished updating z."
+	else
+		echo "$Z_PATH does not exists."
+	fi
+}
+
+function update_essential_scripts {
+	if [[ -d "$ESSENTIAL_SCRIPTS_PATH" ]]; then
+		pull_z
+	else
+		echo "$ESSENTIAL_SCRIPTS_PATH does not exist."
+	fi
+}
+
+update_essential_scripts
+
+
