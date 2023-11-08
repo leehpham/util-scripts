@@ -84,9 +84,19 @@ update_nvim_packages() {
 		echo "Updating neovim's packages ..."
 		# TODO: what does this command do in details?
 		nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-		echo "Finished updating neovim's packages."
+		printf "Finished updating neovim's packages.\n\n"
 	else
 		echo "neovim is not installed or not executable."
+	fi
+}
+
+update_tpm_packages() {
+	if [[ -x "$(command -v tmux)" ]]; then
+		echo "Updating TPM's packages ..."
+		~/.tmux/plugins/tpm/bin/update_plugins all
+		printf "Finished updating TPM's packages.\n\n"
+	else
+		echo "tmux is not installed or not executable."
 	fi
 }
 
@@ -95,3 +105,4 @@ update_homebrew_packages
 update_omz
 update_omz_packages
 update_nvim_packages
+update_tpm_packages
