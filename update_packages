@@ -79,7 +79,17 @@ function update_omz_packages {
 	pull_zsh_plugin "zsh-syntax-highlighting"
 }
 
+function update_nvim_packages {
+	if [[ -x "$(command -v nvim)" ]]; then
+		# TODO: what does this command do in details?
+		nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
+	else
+		echo "neovim is not installed or not executable."
+	fi
+}
+
 update_essential_scripts
 update_homebrew_packages
 update_omz
 update_omz_packages
+update_nvim_packages
