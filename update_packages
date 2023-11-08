@@ -2,7 +2,7 @@
 
 ESSENTIAL_SCRIPTS_PATH="$HOME/essential-scripts"
 
-function pull_z {
+pull_z() {
 	local Z_DIR="z"
 	local Z_PATH="$ESSENTIAL_SCRIPTS_PATH/$Z_DIR"
 
@@ -15,7 +15,7 @@ function pull_z {
 	fi
 }
 
-function update_essential_scripts {
+update_essential_scripts() {
 	if [[ -d "$ESSENTIAL_SCRIPTS_PATH" ]]; then
 		pull_z
 	else
@@ -23,7 +23,7 @@ function update_essential_scripts {
 	fi
 }
 
-function update_homebrew_packages {
+update_homebrew_packages() {
 	if [[ -x "$(command -v brew)" ]]; then
 		echo "Updating Homebrew's packages ..."
 		brew update
@@ -35,7 +35,7 @@ function update_homebrew_packages {
 	fi
 }
 
-function update_omz {
+update_omz() {
 	local OMZ_BASH_FILE="oh-my-zsh.sh"
 
 	# $ZSH points to where OMZ is installed.
@@ -49,7 +49,7 @@ function update_omz {
 	fi
 }
 
-function pull_powerlevel10k {
+pull_powerlevel10k() {
 	local POWERLEVEL10K_PATH="$ZSH/custom/themes/powerlevel10k"
 
 	if [[ -d "$POWERLEVEL10K_PATH" ]]; then
@@ -61,7 +61,7 @@ function pull_powerlevel10k {
 	fi
 }
 
-function pull_zsh_plugin {
+pull_zsh_plugin() {
 	local PLUGIN_PATH="$ZSH/custom/plugins/$1"
 
 	if [[ -d "$PLUGIN_PATH" ]]; then
@@ -73,16 +73,18 @@ function pull_zsh_plugin {
 	fi
 }
 
-function update_omz_packages {
+update_omz_packages() {
 	pull_powerlevel10k
 	pull_zsh_plugin "zsh-autosuggestions"
 	pull_zsh_plugin "zsh-syntax-highlighting"
 }
 
-function update_nvim_packages {
+update_nvim_packages() {
 	if [[ -x "$(command -v nvim)" ]]; then
+		echo "Updating neovim's packages ..."
 		# TODO: what does this command do in details?
 		nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
+		echo "Finished updating neovim's packages."
 	else
 		echo "neovim is not installed or not executable."
 	fi
