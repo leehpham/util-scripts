@@ -79,17 +79,6 @@ update_omz_packages() {
 	pull_zsh_plugin "zsh-syntax-highlighting"
 }
 
-update_nvim_packages() {
-	if [[ -x "$(command -v nvim)" ]]; then
-		echo "Updating neovim's packages ..."
-		# TODO: what does this command do in details?
-		nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync"
-		printf "Finished updating neovim's packages.\n\n"
-	else
-		echo "neovim is not installed or not executable."
-	fi
-}
-
 update_tpm_packages() {
 	if [[ -x "$(command -v tmux)" ]]; then
 		echo "Updating TPM's packages ..."
@@ -104,5 +93,4 @@ update_essential_scripts
 update_homebrew_packages
 update_omz
 update_omz_packages
-update_nvim_packages
 update_tpm_packages
