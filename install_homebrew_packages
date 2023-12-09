@@ -6,3 +6,4 @@ brew install ripgrep
 brew install shellcheck
 brew install jesseduffield/lazygit/lazygit
 brew install fd
+brew install lsd
