@@ -1,9 +1,0 @@
-#!/bin/bash
-
-brew install neovim
-brew install tmux
-brew install ripgrep
-brew install shellcheck
-brew install jesseduffield/lazygit/lazygit
-brew install fd
-brew install lsd
