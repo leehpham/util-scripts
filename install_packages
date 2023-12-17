@@ -13,6 +13,7 @@ install_homebrew_packages() {
 		brew install jesseduffield/lazygit/lazygit
 		brew install fd
 		brew install lsd
+		brew install lua
 		printf "Finished installing Homebrew's packages.\n\n"
 	else
 		echo "Homebrew is not installed or not executable."
