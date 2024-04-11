@@ -89,8 +89,13 @@ update_tpm_packages() {
 	fi
 }
 
-update_essential_scripts
-update_homebrew_packages
-update_omz
-update_omz_packages
-update_tpm_packages
+main() {
+	update_essential_scripts
+	update_homebrew_packages
+	update_omz
+	update_omz_packages
+	update_tpm_packages
+
+}
+
+main
