@@ -3,16 +3,21 @@
 ESSENTIAL_SCRIPTS_PATH="$HOME/essential-scripts"
 
 pull_z() {
+	echo "Start pulling z ..."
+
 	local Z_DIR="z"
 	local Z_PATH="$ESSENTIAL_SCRIPTS_PATH/$Z_DIR"
 
 	if [[ -d "$Z_PATH" ]]; then
-		echo "Updating z ..."
+		echo "Pulling z ..."
 		git -C "$Z_PATH" pull
-		printf "Finished updating z.\n\n"
+		printf "z pulled.\n\n"
 	else
 		echo "$Z_PATH does not exist."
+		exit 1
 	fi
+
+	printf "Finished pulling z.\n\n"
 }
 
 update_essential_scripts() {
