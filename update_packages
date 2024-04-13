@@ -73,15 +73,22 @@ update_omz() {
 }
 
 pull_powerlevel10k() {
+	echo "Start pulling powerlevel10k ..."
+
 	local POWERLEVEL10K_PATH="$ZSH/custom/themes/powerlevel10k"
 
 	if [[ -d "$POWERLEVEL10K_PATH" ]]; then
 		echo "Updating powerlevel10k ..."
+
 		git -C "$POWERLEVEL10K_PATH" pull
-		printf "Finished updating powerlevel10k.\n\n"
+
+		printf "powerlevel10k updated.\n\n"
 	else
 		echo "$POWERLEVEL10K_PATH does not exist."
+		exit 1
 	fi
+
+	printf "Finished pulling powerlevel10k.\n\n"
 }
 
 pull_zsh_plugin() {
