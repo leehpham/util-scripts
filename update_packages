@@ -21,11 +21,16 @@ pull_z() {
 }
 
 update_essential_scripts() {
+	echo "Start updating essential scripts ..."
+
 	if [[ -d "$ESSENTIAL_SCRIPTS_PATH" ]]; then
 		pull_z
 	else
 		echo "$ESSENTIAL_SCRIPTS_PATH does not exist."
+		exit 1
 	fi
+
+	printf "Finished updating essential scripts ..."
 }
 
 update_homebrew_packages() {
