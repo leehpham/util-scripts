@@ -121,13 +121,20 @@ update_omz_packages() {
 }
 
 update_tpm_packages() {
+	echo "Start updating tpm packages ..."
+
 	if [[ -x "$(command -v tmux)" ]]; then
 		echo "Updating TPM's packages ..."
+
 		~/.tmux/plugins/tpm/bin/update_plugins all
-		printf "Finished updating TPM's packages.\n\n"
+
+		printf "TPM's packages updated.\n\n"
 	else
 		echo "tmux is not installed or not executable."
+		exit 1
 	fi
+
+	printf "Finished updating tpm packages.\n\n"
 }
 
 main() {
