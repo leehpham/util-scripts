@@ -34,15 +34,22 @@ update_essential_scripts() {
 }
 
 update_homebrew_packages() {
+	echo "Start updating homebrew packages ..."
+
 	if [[ -x "$(command -v brew)" ]]; then
 		echo "Updating Homebrew's packages ..."
+
 		brew update
 		brew outdated
 		brew upgrade
-		printf "Finished updating Homebrew's packages.\n\n"
+
+		printf "Homebrew's packages updated.\n\n"
 	else
 		echo "Homebrew is not installed or not executable."
+		exit 1
 	fi
+
+	printf "Finished updating homebrew packages ..."
 }
 
 update_omz() {
