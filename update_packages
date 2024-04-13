@@ -91,22 +91,29 @@ pull_powerlevel10k() {
 	printf "Finished pulling powerlevel10k.\n\n"
 }
 
-pull_zsh_plugin() {
+pull_omz_plugin() {
+	echo "Start pulling omz plugin: $1"
+
 	local PLUGIN_PATH="$ZSH/custom/plugins/$1"
 
 	if [[ -d "$PLUGIN_PATH" ]]; then
 		echo "Updating $1 ..."
+
 		git -C "$PLUGIN_PATH" pull
-		printf "Finished updating %s.\n\n" "$1"
+
+		printf "omz plugin %s updated.\n\n" "$1"
 	else
 		echo "$PLUGIN_PATH does not exist."
+		exit 1
 	fi
+
+	printf "Finished updating omz plugin %s.\n\n" "$1"
 }
 
 update_omz_packages() {
 	pull_powerlevel10k
-	pull_zsh_plugin "zsh-autosuggestions"
-	pull_zsh_plugin "zsh-syntax-highlighting"
+	pull_omz_plugin "zsh-autosuggestions"
+	pull_omz_plugin "zsh-syntax-highlighting"
 }
 
 update_tpm_packages() {
