@@ -111,9 +111,13 @@ pull_omz_plugin() {
 }
 
 update_omz_packages() {
+	echo "Start updating omz packages ..."
+
 	pull_powerlevel10k
 	pull_omz_plugin "zsh-autosuggestions"
 	pull_omz_plugin "zsh-syntax-highlighting"
+
+	printf "Finished updating omz packages.\n\n"
 }
 
 update_tpm_packages() {
