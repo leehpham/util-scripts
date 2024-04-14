@@ -90,10 +90,7 @@ validate_installed_commands() {
 		exit 1
 	fi
 
-	if [[ ! -x "$(command -v nvm)" ]]; then
-		echo "Please install nvm manually."
-		exit 1
-	fi
+	echo "Please install nvm manually."
 
 	if [[ ! -x "$(command -v git)" ]]; then
 		echo "Please install git manually."
