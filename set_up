@@ -3,78 +3,88 @@
 install_homebrew_packages() {
 	echo "Start installing Homebrew's packages ..."
 
-	if [[ -x "$(command -v brew)" ]]; then
-		echo "brew found. Installing packages ..."
+	brew install neovim
+	brew install tmux
+	brew install ripgrep
+	brew install shellcheck
+	brew install jesseduffield/lazygit/lazygit
+	brew install fd
+	brew install lsd
+	brew install lua
+	brew install gnu-sed
 
-		brew install neovim
-		brew install tmux
-		brew install ripgrep
-		brew install shellcheck
-		brew install jesseduffield/lazygit/lazygit
-		brew install fd
-		brew install lsd
-		brew install lua
-		brew install gnu-sed
-
-		printf "Finished installing Homebrew's packages.\n\n"
-	else
-		echo "brew is not installed or not executable."
-		exit 1
-	fi
+	printf "Finished installing Homebrew's packages.\n\n"
 }
 
 clone_neovim_config() {
 	echo "Start cloning neovim config ..."
+	git clone git@github.com:leehpham/lazyvim-config.git ~/.config/nvim
+	printf "Finished cloning neovim config.\n\n"
+}
 
-	if [[ ! -d ~/.config ]]; then
-		mkdir ~/.config
-	fi
+install_oh_my_zsh() {
+	echo "Start installing Oh My Zsh ..."
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	echo "Finished installing Oh My Zsh.\n\n"
+}
 
-	if [[ -x "$(command -v git)" ]]; then
-		echo "git found. Cloning neovim config ..."
+install_powerlevel10k() {
+	echo "Start installing po"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	echo "Finished installing powerlevel10k.\n\n"
+}
 
-		git clone git@github.com:leehpham/lazyvim-config.git ~/.config/nvim
+install_zsh_syntax_highlighting() {
+	echo "Start installing zsh-syntax-highlighting ..."
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	echo "Finished installing zsh-syntax-highlighting.\n\n"
+}
 
-		printf "Finished cloning neovim config.\n\n"
-	else
-		echo "git is not installed or not executable."
-		exit 1
-	fi
+install_zsh_autosuggestions() {
+	echo "Start installing zsh-autosuggestions ..."
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	echo "Finished installing zsh-autosuggestions"
 }
 
 clone_z() {
 	echo "Start cloning z ..."
-
-	if [[ -x "$(command -v git)" ]]; then
-		echo "git found. Cloning z ..."
-
-		git clone git@github.com:rupa/z.git ~/essential-scripts/z
-
-		printf "Finished cloning z.\n\n"
-	else
-		echo "git is not installed or not executable."
-		exit 1
-	fi
+	git clone git@github.com:rupa/z.git ~/essential-scripts/z
+	printf "Finished cloning z.\n\n"
 }
 
 clone_dotfiles() {
 	echo "Start cloning dotfiles ..."
-
-	if [[ -x "$(command -v git)" ]]; then
-		echo "git found. Cloning dotfiles ..."
-
-		git clone git@github.com:leehpham/dotfiles.git ~/dotfiles
-
-		printf "Finished cloning dotfiles.\n\n"
-	else
-		echo "git is not installed or not executable."
-		exit 1
-	fi
+	git clone git@github.com:leehpham/dotfiles.git ~/dotfiles
+	printf "Finished cloning dotfiles.\n\n"
 }
 
-main() {
-	echo "Start setting things up ..."
+create_symlink() {
+	echo "Start creating symlink for $1/$2 ..."
 
+	local source_file_path="$HOME/dotfiles/$1/$2"
+
+	if [[ -f "$source_file_path" ]]; then
+		ln -s "$source_file_path" "$HOME/$2"
+	else
+		echo "$1/$2 does not exist."
+		exit 1
+	fi
+
+	printf "Finished creating symlink for $1.\n\n"
+}
+
+create_symlinks() {
+	echo "Start creating symlinks ..."
+
+	create_symlink "git" ".gitconfig"
+	create_symlink "powerlevel10k" ".p10k.zsh"
+	create_symlink "tmux" ".tmux.conf"
+	create_symlink "zsh" ".zshrc"
+
+	printf "Finished creating symlinks.\n\n"
+}
+
+validate_installed_commands() {
 	if [[ ! -x "$(command -v brew)" ]]; then
 		echo "Please install Homebrew manually."
 		exit 1
@@ -85,10 +95,26 @@ main() {
 		exit 1
 	fi
 
+	if [[ ! -x "$(command -v git)" ]]; then
+		echo "Please install git manually."
+		exit 1
+	fi
+}
+
+main() {
+	echo "Start setting things up ..."
+
+	validate_installed_commands
+
 	install_homebrew_packages
 	clone_neovim_config
+	install_oh_my_zsh
+	install_powerlevel10k
+	install_zsh_syntax_highlighting
+	install_zsh_autosuggestions
 	clone_z
 	clone_dotfiles
+	create_symlinks
 
 	printf "Setup completed.\n\n"
 }
