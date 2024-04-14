@@ -22,6 +22,12 @@ clone_neovim_config() {
 	printf "Finished cloning neovim config.\n\n"
 }
 
+clone_tpm() {
+	echo "Start cloning tpm ..."
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	printf "Finished cloning tpm.\n\n"
+}
+
 install_oh_my_zsh() {
 	echo "Start installing Oh My Zsh ..."
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -29,7 +35,7 @@ install_oh_my_zsh() {
 }
 
 install_powerlevel10k() {
-	echo "Start installing po"
+	echo "Start installing powerlevel10k ..."
 	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 	echo "Finished installing powerlevel10k.\n\n"
 }
