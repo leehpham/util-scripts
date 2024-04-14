@@ -24,18 +24,33 @@ install_homebrew_packages() {
 }
 
 clone_neovim_config() {
-	echo "Start pulling neovim config ..."
+	echo "Start cloning neovim config ..."
 
 	if [[ ! -d ~/.config ]]; then
 		mkdir ~/.config
 	fi
 
 	if [[ -x "$(command -v git)" ]]; then
-		echo "git found. Pulling neovim config ..."
+		echo "git found. Cloning neovim config ..."
 
 		git clone git@github.com:leehpham/lazyvim-config.git ~/.config/nvim
 
-		printf "Finished pulling neovim config.\n\n"
+		printf "Finished cloning neovim config.\n\n"
+	else
+		echo "git is not installed or not executable."
+		exit 1
+	fi
+}
+
+clone_z() {
+	echo "Start cloning z ..."
+
+	if [[ -x "$(command -v git)" ]]; then
+		echo "git found. Cloning z ..."
+
+		git clone git@github.com:rupa/z.git ~/essential-scripts/z
+
+		printf "Finished cloning z.\n\n"
 	else
 		echo "git is not installed or not executable."
 		exit 1
@@ -72,6 +87,7 @@ main() {
 
 	install_homebrew_packages
 	clone_neovim_config
+	clone_z
 	clone_dotfiles
 
 	printf "Setup completed.\n\n"
