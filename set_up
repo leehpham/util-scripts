@@ -13,6 +13,7 @@ install_homebrew_packages() {
   brew install lua
   brew install gnu-sed
   brew install pngpaste
+  brew install pyenv
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
