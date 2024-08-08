@@ -113,6 +113,7 @@ main() {
 
   install_homebrew_packages
   clone_neovim_config
+  clone_tpm
   install_oh_my_zsh
   install_powerlevel10k
   install_zsh_syntax_highlighting
