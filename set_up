@@ -16,6 +16,7 @@ install_homebrew_packages() {
   brew install pyenv
   brew install bats-core
   brew install pstree
+  brew install tree
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
