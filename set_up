@@ -17,6 +17,7 @@ install_homebrew_packages() {
   brew install bats-core
   brew install pstree
   brew install tree
+  brew install fzf
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
