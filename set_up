@@ -18,6 +18,7 @@ install_homebrew_packages() {
   brew install pstree
   brew install tree
   brew install fzf
+  brew install xz
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
