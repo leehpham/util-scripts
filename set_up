@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Performs a clean installation.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+set -o errtrace
+
 install_homebrew_packages() {
   echo "Start installing Homebrew's packages ..."
 
