@@ -32,7 +32,7 @@ install_homebrew_packages() {
 
 clone_neovim_config() {
   echo "Start cloning neovim config ..."
-  git clone git@github.com:leehpham/lazyvim-config.git ~/.config/nvim
+  git clone git@github-personal:leehpham/lazyvim-config.git ~/.config/nvim
   printf "Finished cloning neovim config.\n\n"
 }
 
@@ -68,13 +68,13 @@ install_zsh_autosuggestions() {
 
 clone_z() {
   echo "Start cloning z ..."
-  git clone git@github.com:rupa/z.git ~/essential-scripts/z
+  git clone https://github.com/rupa/z.git ~/essential-scripts/z
   printf "Finished cloning z.\n\n"
 }
 
 clone_dotfiles() {
   echo "Start cloning dotfiles ..."
-  git clone git@github.com:leehpham/dotfiles.git ~/dotfiles
+  git clone git@github-personal:leehpham/dotfiles.git ~/dotfiles
   printf "Finished cloning dotfiles.\n\n"
 }
 
