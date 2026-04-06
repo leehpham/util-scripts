@@ -29,6 +29,8 @@ install_homebrew_packages() {
   brew install tree-sitter-cli
   brew install go
   brew install --cask claude-code
+  brew install cloudflared
+  brew install trufflehog
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
