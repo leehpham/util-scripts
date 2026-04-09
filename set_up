@@ -31,6 +31,7 @@ install_homebrew_packages() {
   brew install --cask claude-code
   brew install cloudflared
   brew install trufflehog
+  brew install gh
 
   printf "Finished installing Homebrew's packages.\n\n"
 }
